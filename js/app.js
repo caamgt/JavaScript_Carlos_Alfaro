@@ -210,6 +210,10 @@ var Calculadora = {
 			self.agregarPunto();
 		});
 
+		document.getElementById('sign').addEventListener('click', function() {
+			self.agregarSigno('-');
+		});
+
 	},
 
 	// Agregar valor al display
@@ -228,7 +232,6 @@ var Calculadora = {
 			}
 		}
 
-		console.log(displayOptimo);
 	},
 
 	// valida que se muestren 8 numeros en display
@@ -249,8 +252,20 @@ var Calculadora = {
 			} else if (display.textContent.indexOf('.') == -1) {
 					display.textContent = display.textContent + '.';
 			} else {
-					display.textContent = display.textContent;
+					display.textContent;
 			}
+	},
+
+	//Signo +/-
+	agregarSigno: function() {
+		var signo = document.getElementById('display');
+		if (signo.textContent == 0) {
+			signo.textContent = signo.textContent;
+		} else if (signo.textContent.indexOf('-') != -1) {
+				signo.textContent = signo.textContent.substring(1);
+		} else {
+			signo.textContent = '-' + signo.textContent
+		}
 	},
 
 	// Limpiar Display
