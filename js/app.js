@@ -211,14 +211,34 @@ var Calculadora = {
 		});
 
 		document.getElementById('sign').addEventListener('click', function() {
-			self.agregarSigno('-');
+			self.agregarSigno();
+		});
+
+		document.getElementById('mas').addEventListener('click', function() {
+			self.operador('+');
+		});
+
+		document.getElementById('menos').addEventListener('click', function() {
+			self.operador('-');
+		});
+
+		document.getElementById('por').addEventListener('click', function() {
+			self.operador('*');
+		});
+
+		document.getElementById('dividido').addEventListener('click', function() {
+			self.operador('/');
+		});
+
+		document.getElementById('igual').addEventListener('click', function() {
+			self.calcular();
 		});
 
 	},
 
 	// Agregar valor al display
 	agregarValor: function(valor) {
-		var elemento = document.getElementById('display');
+		elemento = document.getElementById('display');
 		if (sessionStorage.result == 1) {
 			elemento.innerHTML = valor;
 			sessionStorage.result = 0;
@@ -268,10 +288,39 @@ var Calculadora = {
 		}
 	},
 
+	// Tipo de operación
+	operador: function(op) {
+		operacion = 0;
+		display = document.getElementById('display');
+		if (op.indexOf('*') > -1) {operacion = 1;};
+		if (op.indexOf('/') > -1) {operacion = 2;};
+		if (op.indexOf('+') > -1) {operacion = 3;};
+		if (op.indexOf('-') > -1) {operacion = 4;};
+
+		memoria = display.textContent;
+		display.textContent = "";
+	},
+
+	//Realizar la operación
+	calcular: function() {
+		display = document.getElementById('display');
+		if (operacion == 1) {display.textContent = eval(memoria) * eval(display.textContent); };
+		if (operacion == 2) {display.textContent = eval(memoria) / eval(display.textContent); };
+		if (operacion == 3) {display.textContent = eval(memoria) + eval(display.textContent); };
+		if (operacion == 4) {display.textContent = eval(memoria) - eval(display.textContent); };
+
+		operacion = 0;
+		memoria = "0";
+
+	},
+
 	// Limpiar Display
 	limpiarDisplay: function() {
 		document.getElementById('on').addEventListener('click', function() {
 			document.getElementById('display').innerHTML = "0";
+			memoria = "";
+			operacion = "";
+			display.textContent = 0;
 		});
 	},
 
