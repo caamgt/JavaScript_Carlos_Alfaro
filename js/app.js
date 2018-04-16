@@ -305,7 +305,7 @@ var Calculadora = {
 	calcular: function() {
 		display = document.getElementById('display');
 		if (operacion == 1) {display.textContent = eval(memoria) * eval(display.textContent); };
-		if (operacion == 2) {display.textContent = eval(memoria) / eval(display.textContent); };
+		if (operacion == 2) {display.textContent = (eval(memoria) / eval(display.textContent)).toFixed(3); };
 		if (operacion == 3) {display.textContent = eval(memoria) + eval(display.textContent); };
 		if (operacion == 4) {display.textContent = eval(memoria) - eval(display.textContent); };
 
